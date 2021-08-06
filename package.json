@@ -1,0 +1,24 @@
+{
+  "name": "jedi-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jediapps/jedi-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jediapps/jedi-utils/issues"
+  },
+  "homepage": "https://github.com/jediapps/jedi-utils#readme",
+  "dependencies": {
+    "i": "^0.3.6",
+    "npm": "^7.20.5",
+    "winston": "^3.3.3"
+  }
+}
