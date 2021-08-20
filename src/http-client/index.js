@@ -1,8 +1,11 @@
 const client = require('./client')
+const logger = require('../logger')
 
 module.exports = {
   async request (config) {
+    logger.debug({ message: 'Making http request.', config })
     const response = await client.request(config)
+    logger.debug({ message: 'Response from http request', data: response.data })
 
     return response.data
   },

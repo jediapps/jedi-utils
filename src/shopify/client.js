@@ -1,5 +1,6 @@
 const httpReq = require('../http-client')
 const { waitInSeconds } = require('../util')
+const logger = require('../logger')
 
 class ShopifyApiClient {
   constructor ({ storeIdentifier, accessToken, shopifyAPIVersion }) {
@@ -48,7 +49,7 @@ class ShopifyApiClient {
         break
       } catch (err) {
         if (errCount > maxErrCount) {
-          LOGGER.error({
+          logger.error({
             message: err.message,
             options
           })
@@ -61,6 +62,7 @@ class ShopifyApiClient {
 
         errCount++
         await waitInSeconds(4 * expGrowthX)
+        logger.debug({ message: 'Inside while loop err', errCount })
       }
     }
 
@@ -71,6 +73,7 @@ class ShopifyApiClient {
     let buildConfig = await buildConfigObj.call(this, Object.assign({}, { url: 'graphql.json' }, options, { method: 'post' }))
     let result = await this.request(buildConfig)
     if (result.errors) {
+      logger.debug({ storeIdentifier: this.storeIdentifier, message: 'Caught error in gql response', errors: JSON.stringify(result.errors) })
       throw new Error(JSON.stringify(result.errors))
     }
     return result

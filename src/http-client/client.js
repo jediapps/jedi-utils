@@ -1,5 +1,6 @@
 const axios = require('axios')
 const axiosRetry = require('axios-retry')
+const logger = require('../logger')
 
 const client = axios.create({
   timeout: 60000,
@@ -16,7 +17,7 @@ axiosRetry(client, {
     // TODO: handle specific errors codes only for retry
     if (error && error.response && error.response.status) {
       if (error.response.status === 429 || error.response.status === 500) {
-        LOGGER.info({
+        logger.info({
           message: 'inside axiosRetry',
           statusCode: 429
         })
