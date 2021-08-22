@@ -3,17 +3,19 @@ const { waitInSeconds } = require('../util')
 const logger = require('../logger')
 
 class ShopifyApiClient {
-  constructor ({ storeIdentifier, accessToken, shopifyAPIVersion, localDevAppClientId, localDevAppSecreteKey }) {
+  constructor ({ storeIdentifier, accessToken }) {
     if (!storeIdentifier) throw Error('storeIdentifier is required')
     if (!accessToken) throw Error('accessToken is required')
+    if (!process.env.SHOPIFY_API_VERSION) throw Error('SHOPIFY_API_VERSION env is required')
 
     this.storeIdentifier = storeIdentifier
     this.accessToken = accessToken
-    this.shopifyAPIVersion = shopifyAPIVersion
+    this.shopifyAPIVersion = process.env.SHOPIFY_API_VERSION
 
-    // This is for local development store
-    this.localDevAppClientId = localDevAppClientId
-    this.localDevAppSecreteKey = localDevAppSecreteKey
+    // For local development
+    this.localDevStoreIdentifier = process.env.LOCAL_DEV_STORE_IDENTIFIER
+    this.localDevAppClientId = process.env.LOCAL_DEV_APP_CLIENT_ID
+    this.localDevAppSecreteKey = process.env.LOCAL_DEV_APP_SECRET_KEY
   }
 
   async request (config) {
@@ -86,9 +88,8 @@ class ShopifyApiClient {
 
 const buildConfigObj = async function (config) {
   let newConfig
-  if (this.localDevAppClientId) {
-    if (!this.localDevAppSecreteKey) throw Error('localDevAppSecreteKey is required')
-    // for local development
+  // for local development
+  if (this.storeIdentifier === this.localDevStoreIdentifier) {
     newConfig = {
       baseURL: `https://${this.localDevAppClientId}:${this.localDevAppSecreteKey}@${this.storeIdentifier}.myshopify.com/admin/api/${this.shopifyAPIVersion}/`
     }
