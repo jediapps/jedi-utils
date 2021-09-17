@@ -159,10 +159,8 @@ module.exports = {
   getGQLMutationCollectionReorderProductsTemplate ({ id, moves }) {
     return {
       variables: {
-        input: {
-          id,
-          moves
-        }
+        id,
+        moves
       },
       query: `
         mutation collectionReorderProducts($id: ID!, $moves: [MoveInput!]!) {

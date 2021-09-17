@@ -16,10 +16,10 @@ axiosRetry(client, {
   retryCondition: function (error) {
     // TODO: handle specific errors codes only for retry
     if (error && error.response && error.response.status) {
-      if (error.response.status === 429 || error.response.status === 500) {
+      if (error.response.status === 429) {
         logger.info({
           message: 'inside axiosRetry',
-          statusCode: 429
+          statusCode: error.response.status
         })
         return true
       }
