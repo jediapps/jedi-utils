@@ -1,7 +1,11 @@
 const logger = require('server/services/logger')
+const Agenda = require('agenda')
 
 class AgendaWrapper {
-  constructor (agenda) {
+  constructor (MONGODB_URI, COLLECTION_NAME) {
+    const connectionOpts = { db: { address: MONGODB_URI, collection: COLLECTION_NAME }, processEvery: 10000 }
+    const agenda = new Agenda(connectionOpts)
+
     this.agenda = agenda
   }
 
