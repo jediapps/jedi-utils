@@ -1,4 +1,4 @@
-const logger = require('server/services/logger')
+const logger = require('../logger')
 const Agenda = require('agenda')
 
 class AgendaWrapper {
