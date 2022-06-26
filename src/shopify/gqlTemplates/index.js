@@ -9,6 +9,7 @@ const MutationCustomerNoteUpdate = require('./templates/MutationCustomerNoteUpda
 const MutationCollectionReorderProducts = require('./templates/MutationCollectionReorderProducts')
 const MutationCollectionUpdate = require('./templates/MutationCollectionUpdate')
 const MutationWebhookSubscriptionCreate = require('./templates/MutationWebhookSubscriptionCreate')
+const MutationProductChangeStatus = require('./templates/MutationProductChangeStatus')
 
 module.exports = {
   Orders,
@@ -21,5 +22,6 @@ module.exports = {
   MutationCustomerNoteUpdate,
   MutationCollectionReorderProducts,
   MutationCollectionUpdate,
-  MutationWebhookSubscriptionCreate
+  MutationWebhookSubscriptionCreate,
+  MutationProductChangeStatus
 }
