@@ -16,5 +16,10 @@
     "url": "https://github.com/jediapps/jedi-utils/issues"
   },
   "homepage": "https://github.com/jediapps/jedi-utils#readme",
-  "dependencies": {}
+  "dependencies": {
+    "agenda": "3.1.0",
+    "axios": "^0.18.0",
+    "axios-retry": "^3.1.2",
+    "winston": "^3.1.0"
+  }
 }
