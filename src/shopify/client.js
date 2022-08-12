@@ -57,6 +57,7 @@ class ShopifyApiClient {
         if ((errCount > maxErrCount) || !!options.escapeRetry ) {
           logger.error({
             message: err.message,
+            toReturn,
             options
           })
           throw new Error(err.message)
