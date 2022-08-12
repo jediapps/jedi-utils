@@ -54,7 +54,7 @@ class ShopifyApiClient {
         toReturn = await this.execGQL(options)
         break
       } catch (err) {
-        if (errCount > maxErrCount) {
+        if ((errCount > maxErrCount) || !!options.escapeRetry ) {
           logger.error({
             message: err.message,
             options
