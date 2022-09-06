@@ -14,8 +14,7 @@ class ShopifyApiClient {
 
     // For local development
     this.localDevStoreIdentifier = process.env.LOCAL_DEV_STORE_IDENTIFIER
-    this.localDevAppClientId = process.env.LOCAL_DEV_APP_CLIENT_ID
-    this.localDevAppSecreteKey = process.env.LOCAL_DEV_APP_SECRET_KEY
+    this.localAccessToken = process.env.LOCAL_ACCESS_TOKEN
   }
 
   async request (config) {
@@ -88,19 +87,16 @@ class ShopifyApiClient {
 }
 
 const buildConfigObj = async function (config) {
-  let newConfig
+  let newConfig = {
+    baseURL: `https://${this.storeIdentifier}.myshopify.com/admin/api/${this.shopifyAPIVersion}/`,
+    headers: {
+      'X-Shopify-Access-Token': this.accessToken
+    }
+  }
+
   // for local development
   if (this.storeIdentifier === this.localDevStoreIdentifier) {
-    newConfig = {
-      baseURL: `https://${this.localDevAppClientId}:${this.localDevAppSecreteKey}@${this.storeIdentifier}.myshopify.com/admin/api/${this.shopifyAPIVersion}/`
-    }
-  } else {
-    newConfig = {
-      baseURL: `https://${this.storeIdentifier}.myshopify.com/admin/api/${this.shopifyAPIVersion}/`,
-      headers: {
-        'X-Shopify-Access-Token': this.accessToken
-      }
-    }
+    newConfig.headers['X-Shopify-Access-Token'] = this.localAccessToken
   }
 
   return Object.assign({}, config, newConfig)
