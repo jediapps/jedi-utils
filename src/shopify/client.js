@@ -69,7 +69,7 @@ class ShopifyApiClient {
 
         errCount++
         await waitInSeconds(4 * expGrowthX)
-        logger.debug({ message: 'Inside while loop err', errCount })
+        logger.debug({ message: 'Inside while loop err', errCount, errMsg: err ? err.message : '' })
       }
     }
 
